@@ -1,4 +1,21 @@
 import http from "http";
+import mysql from "mysql";
+
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  port: "3306",
+  database: "node_simple_server",
+});
+
+db.connect(err => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log("Database is connected");
+});
 
 const server = http.createServer((req, res) => {
   console.log(req.url);
