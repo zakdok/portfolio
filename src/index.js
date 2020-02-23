@@ -20,14 +20,23 @@ db.connect(err => {
 const server = http.createServer((req, res) => {
   console.log(req.url);
 
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.write(
-    JSON.stringify({
-      result: "This is a simple-node-server",
-      url: req.url,
-    }),
-  );
-  res.end();
+  db.query("show databases;", (err, result, fields) => {
+    let data = {};
+    if (err) {
+      data = { err };
+    } else if (result) {
+      data = { result };
+    }
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.write(
+      JSON.stringify({
+        result: "This is a simple-node-server",
+        url: req.url,
+        data,
+      }),
+    );
+    res.end();
+  });
 });
 
 server.listen(3000, () => console.log("Server is started on 3000"));
