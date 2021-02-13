@@ -3,8 +3,8 @@ import mysql from "mysql";
 
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "root",
+  user: "admin",
+  password: "Qlalfqjsgh1!",
   port: "3306",
   database: "node_simple_server",
 });
